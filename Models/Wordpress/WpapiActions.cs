@@ -23,10 +23,8 @@ namespace Wpapi.Models.Wordpress
             new WpapiAction("/h", "ヘルプを表示します\r\n",
                 Help),
             new WpapiAction("/regist", "各種キーの保存処理" + "\r\n"
-                + "\t\t-ck コンシューマーキー(必須)" + "\r\n"
-                + "\t\t-cs コンシューマーキー(必須)" + "\r\n"
-                + "\t\t-at アクセストークン(必須)" + "\r\n"
-                + "\t\t-as アクセスシークレット(必須)" + "\r\n"
+                + "\t\t-u WordPressユーザーID(必須)" + "\r\n"
+                + "\t\t-p WordPressパスワード(必須)" + "\r\n"
                 + "\t\t-keysfile キーファイルの保存先(省略時はデフォルトのパス)" + "\r\n"
                 , Regist),
             new WpapiAction("/backno", "バックナンバー関連コマンド" + "\r\n"
@@ -34,6 +32,10 @@ namespace Wpapi.Models.Wordpress
                 + "\t\t-pageid postの場合必須" + "\r\n"
                 + "\t\t-f 出力先のファイルパスを指定します" + "\r\n"
                 , Backno),
+            new WpapiAction("/pageupdate", "固定ページの投稿" + "\r\n"
+                + "\t\t-pageid 必須" + "\r\n"
+                + "\t\t-f 記事の内容が記載されたファイルパスを指定します" + "\r\n"
+                , PageUpdate),
         };
         #endregion
 
@@ -86,6 +88,63 @@ namespace Wpapi.Models.Wordpress
         }
         #endregion
 
+        #region ページの更新処理
+        /// <summary>
+        /// ページの更新処理
+        /// </summary>
+        /// <param name="action">アクション名</param>
+        public static void PageUpdate(string action)
+        {
+            try
+            {
+                int page_id = -1;
+                // ファイル名が指定されていればそこに出力
+                if (!string.IsNullOrWhiteSpace(WpapiArgs.CommandOptions.PageId))
+                {
+                    page_id = int.TryParse(WpapiArgs.CommandOptions.PageId, out page_id) ? page_id : -1;
+                }
+                else
+                {
+                    Console.WriteLine("page_idは必須です。");
+                    return;
+                }
+
+                string content = string.Empty;
+                if (!string.IsNullOrWhiteSpace(WpapiArgs.CommandOptions.FileName)
+                    && File.Exists(WpapiArgs.CommandOptions.FileName))
+                {
+                    using (FileStream fs = new FileStream(WpapiArgs.CommandOptions.FileName,
+                           FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        using (TextReader sr = new StreamReader(fs))
+                        {
+                            content = sr.ReadToEnd();
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("有効なファイルパスが指定されていません。");
+                    Console.WriteLine("ファイルパスは必須です。");
+                    Console.WriteLine(WpapiArgs.CommandOptions.FileName);
+                    return;
+                }
+
+                // ページの投稿
+                PostData(page_id, content).Wait();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        #endregion
+
+        #region バックナンバー作成処理
+        /// <summary>
+        /// バックナンバー作成処理
+        /// </summary>
+        /// <param name="action">アクション名</param>
         public static void Backno(string action)
         {
             try
@@ -112,6 +171,7 @@ namespace Wpapi.Models.Wordpress
                 Console.WriteLine(e.Message);
             }
         }
+        #endregion
 
         #region バックナンバーの投稿処理
         /// <summary>
