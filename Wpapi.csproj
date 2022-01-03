@@ -14,4 +14,8 @@
     <PackageReference Include="WordPressPCL" Version="1.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>
