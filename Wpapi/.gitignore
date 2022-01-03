@@ -2,5 +2,8 @@
 # この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
 ################################################################################
 
-/WpapiInstaller/Release
-/.vs/Wpapi
+/bin/Debug/net5.0
+/obj
+/Poperties/launchSettings.json
+/bin/Release/net5.0/ref
+/bin/Release/net5.0

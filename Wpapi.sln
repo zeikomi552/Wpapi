@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpapi", "Wpapi\Wpapi.csproj", "{B8A94DC9-61A6-4F18-A4B3-E63A0AC5E93F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WpapiInstaller", "WpapiInstaller\WpapiInstaller.vdproj", "{77C54164-2D10-4128-B2B0-769B5F502457}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8A94DC9-61A6-4F18-A4B3-E63A0AC5E93F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8A94DC9-61A6-4F18-A4B3-E63A0AC5E93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8A94DC9-61A6-4F18-A4B3-E63A0AC5E93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8A94DC9-61A6-4F18-A4B3-E63A0AC5E93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C54164-2D10-4128-B2B0-769B5F502457}.Debug|Any CPU.ActiveCfg = Debug
+		{77C54164-2D10-4128-B2B0-769B5F502457}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {300D432B-E435-409A-8B8F-3210348F26B7}
+	EndGlobalSection
+EndGlobal
