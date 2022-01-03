@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Wpapi": {
+      "commandName": "Project",
+      "commandLineArgs": "/backno -type post -pageid 8020 -sort date"
+    }
+  }
+}
